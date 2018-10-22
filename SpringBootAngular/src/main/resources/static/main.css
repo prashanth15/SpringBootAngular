@@ -1,0 +1,39 @@
+table  {
+    border-collapse: collapse;
+}
+ 
+table td, th  {
+    padding: 5px;
+}
+ 
+.create-button  {
+    color: blue;
+    cursor: pointer;
+    padding: 5px;
+}
+.edit-button  {
+    padding: 2px 5px;
+    background: #25A6E1;
+    cursor: pointer;
+}
+ 
+.delete-button  {
+    padding: 2px 5px;
+    background: #CD5C5C;
+    cursor: pointer;
+}
+
+.floatedTable {
+    float:left;
+}
+.inlineTable {
+    display: inline-block;
+}
+
+
+
+.tftable {font-size:12px;color:#333333;display:inline-block;width:200px;border-width: 1px;border-color: #729ea5;border-collapse: collapse; margin-right:20px;}
+.tftable th {font-size:12px;background-color:#acc8cc;border-width: 1px;padding: 8px;border-style: solid;border-color: #729ea5;text-align:left;width:200px;}
+.tftable tr {background-color:#d4e3e5;width:200px;}
+.tftable td {font-size:12px;border-width: 1px;padding: 8px;border-style: solid;border-color: #729ea5;width:200px;}
+.tftable tr:hover {background-color:#ffffff;}

@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <title>AngularJS</title>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" 
+		integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" 
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>   
+      <script th:src="@{/main.js}"></script>
+      <link th:href="@{/main.css}" rel="stylesheet" />
+       
+      <head>
+   <body ng-app="OrderManagement" ng-controller="OrderController">
+      <h3>
+         CREATE BUY OR SELL ORDER
+      </h3>
+      <form ng-submit="submitOrder()">
+         <table border="0" class="tftable">
+            <tr style="display: none;">
+               <td>Order Id</td>
+               <td>{{orderForm.orderId}}</td>
+            </tr>
+            <tr>
+               <td>Order Type</td>
+               <td>
+                <input type="radio" ng-model="orderForm.orderType" name="orderType" value="BUY"> BUY
+  				<input type="radio" ng-model="orderForm.orderType" name="orderType" value="SELL"> SELL
+  				</td>
+            </tr>
+            <tr>
+               <td>Price</td>
+               <td><input type="number" ng-model="orderForm.price" min="1" /></td>
+            </tr>
+            <div role="alert">
+			    <span class="error" ng-show="orderForm.price.$error.number">
+			      Not valid number!</span>
+			  </div>
+            <tr>
+               <td>Volume</td>
+               <td><input type="number" ng-model="orderForm.volume" min="1" /></td>
+            </tr>
+            <div role="alert">
+			    <span class="error" ng-show="orderForm.volume.$error.number">
+			      Not valid number!</span>
+			  </div>
+            <tr>
+               <td colspan="2">
+                  <input type="submit" value="Submit" class="blue-button" />
+               </td>
+            </tr>
+         </table>
+         <br/>
+      </form>
+      <!-- <a class="create-button" ng-click="createOrder()">Create Order</a> -->
+      <br/>
+      <table border="1" class="floatedTable tftable">
+      	<tr>
+            <th style="display: none;">Order Id</th>
+            <th colspan="2">BUY ORDERS</th>
+         </tr>
+         <tr>
+            <th style="display: none;">Order Id</th>
+            <th>Buy Qty</th>
+            <th>Buy Price</th>
+         </tr>
+         <tr ng-repeat="buyOrder in buyOrders | orderBy:'-price'" >
+            <td style="display: none;"> {{ buyOrder.orderId }} </td>
+            <td >{{ buyOrder.volume }}</td>
+          	<td >{{ buyOrder.price }}</td>
+         </tr>
+      </table>
+      <table border="1" class="floatedTable tftable">
+      	<tr>
+            <th style="display: none;">Order Id</th>
+            <th colspan="2">SELL ORDERS</th>
+         </tr>
+         <tr>
+            <th style="display: none;">Order Id</th>
+            <th>Sell Price</th>
+            <th>Sell Qty</th>
+         </tr>
+         <tr ng-repeat="sellOrder in sellOrders | orderBy:'+price' ">
+            <td  style="display: none;"> {{ sellOrder.orderId }}</td>
+            <td >{{ sellOrder.price }}</td>
+            <td >{{ sellOrder.volume }}</td>
+         </tr>
+      </table>
+      <table border="1" class="tftable">
+         <tr>
+            <th style="display: none;">Order Id</th>
+            <th>Order Type</th>
+            <th>Price</th>
+            <th>Volume</th>
+            <th>Edit</th>
+            <th>Delete</th>
+         </tr>
+         <!-- $scope.orders -->
+         <tr ng-repeat="order in orders">
+            <td style="display: none;"> {{ order.orderId }}</td>
+            <td> {{ order.orderType }}</td>
+            <td >{{ order.price }}</td>
+            <td >{{ order.volume }}</td>
+            <td>
+            <a ng-click="editOrder(order)" class="edit-button">Edit</a>
+            </td>
+            <td>
+            <a ng-click="deleteOrder(order)" class="delete-button">Delete</a>
+            </td>
+         </tr>
+      </table>
+      
+      
+   </body>
+</html>
